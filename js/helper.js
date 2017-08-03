@@ -12,6 +12,7 @@ Cameron Pittman
 These are HTML strings. As part of the course, you'll be using JavaScript functions
 replace the %data% placeholder text you see in them.
 */
+
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span>%data%</span><hr>';
 
@@ -57,6 +58,12 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
+
+var formattedName = HTMLheaderName.replace("%data%","Jewel Jacob");
+var formattedRole = HTMLheaderRole.replace("%data%", "System Engineer");
+
+$("#header").prepend(formattedRole);
+$("#header").prepend(formattedName);
 
 
 /*
