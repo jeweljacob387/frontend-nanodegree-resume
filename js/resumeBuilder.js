@@ -1,14 +1,6 @@
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
-
- /* bio contains name, role, welcomeMessage, and biopic strings, contacts object and skills array of skill strings. The contacts object should contain a mobile number, email address, github username, twitter handle and location. The twitter property is optional. */
-
 var bio = {
   "name" : "Jewel Jacob",
   "role" : "System Engineer" ,
-  "welcomeMessage" : "Hello there",
-  "biopic" : "http://sample.com/dp.jpg",
   "contacts" : {
     "mobile" : "+91 7736847936",
     "email" : "jewelsmail@tkgrp.com",
@@ -16,115 +8,167 @@ var bio = {
     "twitter" : "jewltweet",
     "location" : "Aloor"
   },
-  "skills" : ["HTML", "CSS", "JavaScript", "AJAX", "jQuery"]
+  "welcomeMessage" : "Jewel welcomes you to his life",
+  "skills" : ["HTML", "CSS", "JavaScript", "AJAX", "jQuery"],
+  "biopic" : "http://via.placeholder.com/250x250",
+  display : function() {
+    $("#header").prepend(HTMLheaderRole.replace("%data%",bio.role));
+    $("#header").prepend(HTMLheaderName.replace("%data%",bio.name));
+    var topBar = HTMLmobile.replace("%data%",bio.contacts.mobile) +  HTMLgithub.replace("%data%",bio.contacts.github) + HTMLtwitter.replace("%data%",bio.contacts.twitter) + HTMLlocation.replace("%data%",bio.contacts.location);
+    $("#topContacts, #footerContacts").append(HTMLmobile.replace("%data%",bio.contacts.mobile) +  HTMLgithub.replace("%data%",bio.contacts.github) + HTMLtwitter.replace("%data%",bio.contacts.twitter) + HTMLlocation.replace("%data%",bio.contacts.location));
+    $("#header").append(HTMLbioPic.replace("%data%",bio.biopic));
+    $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
+    if (bio.skills.length !== 0) {
+      $("#header").append(HTMLskillsStart);
+      bio.skills.forEach( function(elem){
+        $("#skills").append(HTMLskills.replace("%data%",elem));
+      });
+    }
+  }
+};
+
+
+var education = {
+  "schools" : [
+    {
+    "name" : "St.Annes U P School",
+    "location" : "Anathadam",
+    "degree": "Lower Primary LOL!",
+    "majors" : ["XYZ"],
+    "dates" : "2000 - 2002",
+    "url" : ""
+  },
+  {
+    "name" : "St.Josephs EMHSS",
+    "location" : "Aloor",
+    "degree" : "High School",
+    "majors" : ["XYZ"],
+    "dates" : "2002 - 2010",
+    "url" : ""
+  },
+  {
+    "name" : "St.Antoys HSS",
+    "location" : "Mala",
+    "degree" : "Higher Secondary",
+    "majors" : ["XYZ"],
+    "dates" : "2010 - 2013",
+    "url" : ""
+  },
+  {
+    "name" : "SSET",
+    "location" : "Karukutty",
+    "degree" : "Graduate",
+    "majors" : ["XYZ"],
+    "dates" : "2013 - 2017",
+    "url" : "http://www.scmsgroup.org/sset/"
+  }
+  ],
+  "onlineCourses" : [
+    {
+      "title" : "Front-End Developer",
+      "school" : "Udacity",
+      "dates" : "23/06/17 - 23/11/17",
+      "url" : "www.udacity.com"
+    },
+    {
+      "title" : "Coursera",
+      "school" : "something",
+      "dates" : "from - to",
+      "url" : "www.coursera.org"
+    }
+  ],
+  display : function() {
+    education.schools.forEach( function(elem) {
+      $("#education").append(HTMLschoolStart);
+      var opSchool = HTMLschoolName.replace("%data%",elem.name) + HTMLschoolDegree.replace("%data%",elem.degree);
+      if(elem.url) {
+        opSchool = opSchool.replace("%url%",elem.url);
+      }
+      else {
+        opSchool = opSchool.replace("%url%","#");
+      }
+      $(".education-entry:last").append(opSchool + HTMLschoolDates.replace("%data%",elem.dates) + HTMLschoolLocation.replace("%data%",elem.location) + HTMLschoolMajor.replace("%data%",elem.majors) );
+      });
+    if(education.onlineCourses.length !== 0)
+     {
+       $("#education").append(HTMLonlineClasses);
+       education.onlineCourses.forEach( function(elem) {
+         $("#education").append(HTMLschoolStart);
+         $(".education-entry:last").append(HTMLonlineTitle.replace("%data%", elem.title) + HTMLonlineSchool.replace("%data%", elem.school) + HTMLonlineDates.replace("%data%", elem.dates) + HTMLonlineURL.replace("%data%", elem.url) );
+       });
+     }
+  }
 };
 
 var work = {
   "jobs" : [
     {
       "employer" : "Infosys",
-      "title" : "System Engneer",
+      "title" : "System Engineer",
       "location" : "Mysore",
-      "datesWorked" : ["29/10/16 - 16/12/16", "29/02/17 - 16/11/17"],
+      "dates" : "in progress",
       "description" : "It was a good experience working there as a system engg.it will be good if those who see thid add something to this. my mind is totally blank about what to type. So i do this - blah blah kla kli klu klakla my heart is thirsty to get your lofe, and ill go to ny end to get that. If god allows me none will stand in my path. youre mine.blum blah jewel is my name cheese is very good for health. butter is fatty and cholestrol.bbuu ugqjd utursi wyidv njdjiuef."
     },
     {
       "employer" : "Google",
-      "title" : "Web developers",
+      "title" : "Web Developer",
       "location" : "LA",
-      "datesWorked" : ["29/10/16 - 16/12/16", "29/02/17 - 16/11/17"],
+      "dates" : "in progress",
       "description" : "It was a good experience working there as a Web Dev. It was a good experience working there as a system engg.it will be good if those who see thid add something to this. my mind is totally blank about what to type. So i do this - blah blah kla kli klu klakla my heart is thirsty to get your lofe, and ill go to ny end to get that. If god allows me none will stand in my path. youre mine.blum blah jewel is my name cheese is very good for health. butter is fatty and cholestrol.bbuu ugqjd utursi wyidv njdjiuef."
     }
-  ]
-};
-function displayWork() {
-  for (job in work.jobs) {
+  ],
+  display : function() {
     $("#workExperience").append(HTMLworkStart);
 
-    var logEmp = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var logTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var logEmpDetail = logEmp + logTitle;
+    work.jobs.forEach(function (elem) {
+      var logEmp = HTMLworkEmployer.replace("%data%", elem.employer);
+      var logTitle = HTMLworkTitle.replace("%data%", elem.title);
+      var logEmpDetail = logEmp + logTitle;
 
-    $(".work-entry:last").append(logEmpDetail);
-    $(".work-entry:last").append(HTMLworkDates.replace("%data%",work.jobs[job].datesWorked));
-    $(".work-entry:last").append(HTMLworkLocation.replace("%data%",work.jobs[job].location));
-    $(".work-entry:last").append(HTMLworkDescription.replace("%data%",work.jobs[job].description));
+      $(".work-entry:last").append(logEmpDetail + HTMLworkDates.replace("%data%",elem.datesWorked) + HTMLworkLocation.replace("%data%",elem.location) + HTMLworkDescription.replace("%data%",elem.description) );
+    });
   }
-}
+};
 
 var projects = {
   "projects" : [
     {
       //title, dates and description strings, and an images array with URL strings for project images.
       "title" : "Intelligent Line Follower",
-      "date" : "01/07/1995",
+      "dates" : "01/07/1995",
       "description" : "A line follower which can follow lines and also determine directions at junctions",
-      "images" : ["images/01.jpg", "images/02.jpg", "images/03.jpg"]
+      "images" : ["images/l01.jpg", "images/l02.jpg", "images/l03.jpg"]
     },
     {
       //title, dates and description strings, and an images array with URL strings for project images.
       "title" : "Intelligent Home Manager",
-      "date" : "01/07/1995",
+      "dates" : "01/07/1995",
       "description" : "An All-In-One destination for those who wish to monitor and contron the home resources",
-      "images" : ["images/01.jpg", "images/02.jpg", "images/03.jpg"]
+      "images" : ["images/i01.jpg", "images/i02.jpg", "images/i03.jpg"]
     }
-  ]
-}
-/*education contains an array of schools. Each object in the schools array contains name, location, degree dates and url strings, and amajors array of major strings.
-education also contains an onlineCourses array. Each object in the onlineCourses array should contain a title, school, dates and url strings.  */
-var education = {
-  "schools" : [
-    {
-    "name" : "St.Annes U P School",
-    "location" : "Anathadam",
-    "degree dates" : "2000 - 2002",
-    "url" : "blabla.com",
-    "majors" : ""
-  },
-  {
-    "name" : "St.Josephs EMHSS",
-    "location" : "Aloor",
-    "degree dates" : "2002 - 2010",
-    "url" : "blumblum.com",
-    "majors" : ""
-  },
-  {
-    "name" : "St.Antoys HSS",
-    "location" : "Mala",
-    "degree dates" : "2010 - 2013",
-    "url" : "klakla.com",
-    "majors" : ""
-  }
   ],
-  "onlineCourses" : [
-    {
-      "title" : "xyz",
-      "school" : "",
-      "dates" : "",
-      "url" : ""
-    },
-    {
-      "title" : "",
-      "school" : "",
-      "dates" : "",
-      "url" : ""
+  display : function() {
+    $("#projects").append(HTMLprojectStart);
+
+    for(var project in projects.projects) {
+      var opTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+      $(".project-entry:last").append(opTitle);
+      var opDate = HTMLprojectDates.replace("%data%", projects.projects[project].date);
+      $(".project-entry:last").append(opDate);
+      var opDesc = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+      $(".project-entry:last").append(opDesc);
+
+      for(var img in projects.projects[project].images) {
+        var opImg = HTMLprojectImage.replace("%data%", projects.projects[project].images[img]);
+        $(".project-entry:last").append(opImg);
+      }
     }
-  ]
-}
-
-if (bio.skills.length != 0) {
-  $("#header").append(HTMLskillsStart);
-  for( skill in bio.skills) {
-    $("#skills").append(HTMLskills.replace("%data%",bio.skills[skill]));
   }
-}
+};
 
-$("#main").append(internationalizeButton);
+$("#mapDiv").append(googleMap);
 
-function inName(fullName) {
-  var splitted = fullName.split(" ");
-  var first = splitted[0];
-  var formattedFirst = first[0].toUpperCase() + first.slice(1).toLowerCase();
-  var second = splitted[1].toUpperCase();
-  return(formattedFirst + " " + second);
-}
+work.display();
+bio.display();
+projects.display();
+education.display();
